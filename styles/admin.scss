@@ -1,4 +1,20 @@
+//Base
+@import '~normalize.css/normalize.css';
 @import "./base/colors";
 @import "./base/fonts";
 @import "./base/mixins";
+
+//Libraries
+@import "~primeicons/primeicons.css";
+@import "~primeng/resources/themes/saga-blue/theme.css";
+@import "~primeng/resources/primeng.min.css";
+@import "~primeflex/primeflex.css";
 @import "./base/configuration";
+
+//Shared
+@import "./apps/admin/shell";
+
+//libs
+@import "libs/ui/ui";
+
+
