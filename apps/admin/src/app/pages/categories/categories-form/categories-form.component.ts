@@ -35,6 +35,10 @@ export class CategoriesFormComponent implements OnInit {
     this.checkEditMode();
   }
 
+  onCancel() {
+    this.locationService.back();
+  }
+
   onSubmit() {
     this.isSubmitted = true
     if (this.form.invalid) {

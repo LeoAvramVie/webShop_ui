@@ -40,3 +40,5 @@ Thumbs.db
 
 .angular
 /environments/
+environment.ts
+environment.prod.ts

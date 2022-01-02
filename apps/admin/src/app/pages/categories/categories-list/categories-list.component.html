@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 <div class="admin-page">
   <p-card header="Categories" subheader="List of all categories">
-<!--    categoriesTableToolBar-->
+    <!--    categoriesTableToolBar-->
     <div class="p-grid">
       <div class="p-col-12">
         <p-toolbar>
@@ -16,7 +16,7 @@
         </p-toolbar>
       </div>
     </div>
-<!--    categoriesTable-->
+    <!--    categoriesTable-->
     <br>
     <div class="p-grid">
       <div class="p-col-12">
@@ -24,7 +24,9 @@
           <ng-template pTemplate="header">
             <tr>
 
-              <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <th pSortableColumn="name">Name
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
               <th>Icon</th>
               <th>Color</th>
               <th>Delete/ Edit</th>
@@ -63,4 +65,5 @@
   </p-card>
 </div>
 <!--    confirmations Dialog after hiting delete single category-->
-<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
+                 rejectButtonStyleClass="p-button-text"></p-confirmDialog>
