@@ -1,0 +1,76 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card [header]="editMode ? 'Edit Product' : 'Add Product'" subheader="You can add or edit a Product">
+    <!--    productTableToolBar-->
+    <div class="grid mb-5">
+      <div class="col-12">
+        <p-toolbar>
+          <div class="toolbar-group-left"></div>
+          <div class="toolbar-group-right">
+            <p-button
+              styleClass="button-primary mr-4"
+              [label]="editMode ? 'Update': 'Create'"
+              icon="pi pi-plus"
+              (click)="onSubmit()"
+            ></p-button>
+            <p-button
+              label="Cancel"
+              icon="pi pi-arrow-circle-left"
+              styleClass="button-secondary"
+              (click)="onCancel()"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <!--    categoriesTable-->
+    <br>
+    <div class="grid">
+      <div class="col-12">
+        <form [formGroup]="form">
+          <div class="p-fluid p-formgrid grid">
+            <div class="field col">
+              <label for="name">Name</label>
+              <input id="name" type="text" pInputText formControlName="name">
+              <small *ngIf="productForm.name.invalid && isSubmitted" class="p-error">Name is required</small>
+            </div>
+            <div class="field col">
+              <label for="brand">Brand</label>
+              <input id="brand" type="text" pInputText formControlName="brand">
+              <small *ngIf="productForm.brand.invalid && isSubmitted" class="p-error">Brand is required</small>
+            </div>
+            <div class="field col">
+              <label>Price</label>
+              <p-inputNumber formControlName="price" mode="decimal" inputId="price" [useGrouping]="false">
+              </p-inputNumber>
+              <small *ngIf="productForm.price.invalid && isSubmitted" class="p-error">Price is required</small>
+            </div>
+          </div>
+          <div class="p-fluid p-formgrid grid">
+            <div class="field col-4">
+              <label>CountInStock</label>
+              <p-inputNumber formControlName="countInStock" mode="decimal" inputId="countInStock" [useGrouping]="false">
+              </p-inputNumber>
+              <small *ngIf="productForm.countInStock.invalid && isSubmitted" class="p-error">countInStock is required</small>
+            </div>
+            <div class="field col-4">
+              <label>Category</label>
+                //TODO
+              <small *ngIf="productForm.category.invalid && isSubmitted" class="p-error">Category is required</small>
+            </div>
+            <div class="field col-4">
+              <label>IsFeatured</label><br>
+              <p-inputSwitch formControlName="isFeatured"></p-inputSwitch>
+            </div>
+            <div class="field col-12">
+              <label>Description</label><br>
+              <textarea pInputTextarea formControlName="description" autoResize="autoResize" [rows]="7" [cols]="100"></textarea>
+              <small *ngIf="productForm.description.invalid && isSubmitted" class="p-error">Description is required</small>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>
