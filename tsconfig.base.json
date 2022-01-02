@@ -18,7 +18,8 @@
             "@lav/orders": ["libs/orders/src/index.ts"],
             "@lav/products": ["libs/products/src/index.ts"],
             "@lav/ui": ["libs/ui/src/index.ts"],
-            "@lav/users": ["libs/users/src/index.ts"]
+            "@lav/users": ["libs/users/src/index.ts"],
+            "@env/*": ["environments/*"]
         }
     },
     "exclude": ["node_modules", "tmp"]
