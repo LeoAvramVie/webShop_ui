@@ -20,7 +20,7 @@
     <br>
     <div class="p-grid">
       <div class="p-col-12">
-        <p-table [value]="products" responsiveLayout="scroll" styleClass="p-datatable-gridlines">
+        <p-table [value]="products" responsiveLayout="scroll" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="10"  >
           <ng-template pTemplate="header">
             <tr>
 
@@ -38,10 +38,10 @@
 
               <td>{{product.name}}</td>
               <td><img [src]="product.image" style="max-width: 100px" alt=""></td>
-              <td>{{product.price}}</td>
-              <td>{{product.countInStock}}</td>
-              <td>{{product.category.name}}</td>
-              <td>{{product.dateCreated | date: 'short'}}</td>
+              <td>{{product?.price}}</td>
+              <td>{{product?.countInStock}}</td>
+              <td>{{product?.category?.name}}</td>
+              <td>{{product?.dateCreated | date: 'short'}}</td>
               <td>
                 <p-button
                   icon="pi pi-trash"

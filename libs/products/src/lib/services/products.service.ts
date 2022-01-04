@@ -11,28 +11,28 @@ import {Product} from "../models/product";
 })
 export class ProductsService {
 
-  apiUrlCategories = environment.apiUrl + 'products';
+  apiUrlProducts = environment.apiUrl + 'products';
 
   constructor(private httpClient: HttpClient) {
   }
 
   getProducts(): Observable<Product[]> {
-    return this.httpClient.get<Category[]>(this.apiUrlCategories)
+    return this.httpClient.get<Category[]>(this.apiUrlProducts)
   }
 
-  createProducts(products: Product): Observable<Product> {
-    return this.httpClient.post<Product>(this.apiUrlCategories, products)
+  createProducts(productsData: FormData): Observable<Product> {
+    return this.httpClient.post<Product>(this.apiUrlProducts, productsData)
   }
 
-  updateProducts(products: Product): Observable<Product> {
-    return this.httpClient.put<Product>(this.apiUrlCategories + '/' + products.id, products)
+  updateProducts(productData: FormData, productId: string): Observable<Product> {
+    return this.httpClient.put<Product>(`${this.apiUrlProducts}/${productId}`, productData)
   }
 
   deleteProducts(productsId: string): Observable<Product> {
-    return this.httpClient.delete<Product>(`${this.apiUrlCategories}/${productsId}`)
+    return this.httpClient.delete<Product>(`${this.apiUrlProducts}/${productsId}`)
   }
 
   getProductsById(productsId: string): Observable<Product> {
-    return this.httpClient.get<Product>(`${this.apiUrlCategories}/${productsId}`)
+    return this.httpClient.get<Product>(`${this.apiUrlProducts}/${productsId}`)
   }
 }

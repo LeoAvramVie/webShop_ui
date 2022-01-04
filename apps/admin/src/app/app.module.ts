@@ -25,6 +25,9 @@ import {ProductFormComponent} from './pages/products/product-form/product-form.c
 import {ProductListComponent} from './pages/products/product-list/product-list.component';
 import {InputNumberModule} from "primeng/inputnumber";
 import {InputSwitchModule} from "primeng/inputswitch";
+import {DropdownModule} from "primeng/dropdown";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {EditorModule} from "primeng/editor";
 
 const routes: Routes = [
   {
@@ -91,7 +94,10 @@ const routes: Routes = [
     ConfirmDialogModule,
     ColorPickerModule,
     InputNumberModule,
-    InputSwitchModule
+    InputSwitchModule,
+    DropdownModule,
+    InputTextareaModule,
+    EditorModule
   ],
   providers: [CategoriesService, MessageService, ConfirmationService],
   bootstrap: [AppComponent],
