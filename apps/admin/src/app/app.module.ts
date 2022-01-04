@@ -21,6 +21,13 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ColorPickerModule} from "primeng/colorpicker";
+import {ProductFormComponent} from './pages/products/product-form/product-form.component';
+import {ProductListComponent} from './pages/products/product-list/product-list.component';
+import {InputNumberModule} from "primeng/inputnumber";
+import {InputSwitchModule} from "primeng/inputswitch";
+import {DropdownModule} from "primeng/dropdown";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {EditorModule} from "primeng/editor";
 
 const routes: Routes = [
   {
@@ -29,6 +36,18 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'products',
+        component: ProductListComponent
+      },
+      {
+        path: 'products/form',
+        component: ProductFormComponent
+      },
+      {
+        path: 'products/form/:id',
+        component: ProductFormComponent
       },
       {
         path: 'categories',
@@ -41,7 +60,7 @@ const routes: Routes = [
       {
         path: 'categories/form/:id',
         component: CategoriesFormComponent
-      }
+      },
     ]
   }
 
@@ -55,7 +74,9 @@ const routes: Routes = [
     ShellComponent,
     SidebarComponent,
     CategoriesListComponent,
-    CategoriesFormComponent,],
+    CategoriesFormComponent,
+    ProductFormComponent,
+    ProductListComponent,],
 
   imports: [
     BrowserModule,
@@ -71,7 +92,12 @@ const routes: Routes = [
     ReactiveFormsModule,
     ToastModule,
     ConfirmDialogModule,
-    ColorPickerModule
+    ColorPickerModule,
+    InputNumberModule,
+    InputSwitchModule,
+    DropdownModule,
+    InputTextareaModule,
+    EditorModule
   ],
   providers: [CategoriesService, MessageService, ConfirmationService],
   bootstrap: [AppComponent],
