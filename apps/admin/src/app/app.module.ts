@@ -28,6 +28,14 @@ import {InputSwitchModule} from "primeng/inputswitch";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {EditorModule} from "primeng/editor";
+import {UsersFormComponent} from './pages/users/users-form/users-form.component';
+import {UsersListComponent} from './pages/users/users-list/users-list.component';
+import {UsersService} from "../../../../libs/users/src/lib/service/users.service";
+import {TagModule} from "primeng/tag";
+import {InputMaskModule} from "primeng/inputmask";
+import {OrdersListComponent} from "./pages/orders/orders-list/orders-list.component";
+import {OrdersDetailComponent} from "./pages/orders/orders-detail/orders-detail.component";
+import {OrdersService} from "../../../../libs/orders/src/lib/services/orders.service";
 
 const routes: Routes = [
   {
@@ -61,6 +69,26 @@ const routes: Routes = [
         path: 'categories/form/:id',
         component: CategoriesFormComponent
       },
+      {
+        path: 'users',
+        component: UsersListComponent
+      },
+      {
+        path: 'users/form',
+        component: UsersFormComponent
+      },
+      {
+        path: 'users/form/:id',
+        component: UsersFormComponent
+      },
+      {
+        path: 'orders',
+        component: OrdersListComponent
+      },
+      {
+        path: 'orders/:id',
+        component: OrdersDetailComponent
+      },
     ]
   }
 
@@ -76,7 +104,12 @@ const routes: Routes = [
     CategoriesListComponent,
     CategoriesFormComponent,
     ProductFormComponent,
-    ProductListComponent,],
+    ProductListComponent,
+    UsersFormComponent,
+    UsersListComponent,
+    OrdersDetailComponent,
+    OrdersListComponent
+  ],
 
   imports: [
     BrowserModule,
@@ -97,9 +130,11 @@ const routes: Routes = [
     InputSwitchModule,
     DropdownModule,
     InputTextareaModule,
-    EditorModule
+    EditorModule,
+    TagModule,
+    InputMaskModule
   ],
-  providers: [CategoriesService, MessageService, ConfirmationService],
+  providers: [CategoriesService, MessageService, ConfirmationService, UsersService, OrdersService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
