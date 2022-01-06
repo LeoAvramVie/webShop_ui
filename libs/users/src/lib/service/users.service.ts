@@ -50,7 +50,6 @@ export class UsersService {
   }
 
   getCountry(countryKey: string): string {
-    console.log('getCountry', countriesLib.getName(countryKey, 'en'))
     return countriesLib.getName(countryKey, 'en');
   }
 }

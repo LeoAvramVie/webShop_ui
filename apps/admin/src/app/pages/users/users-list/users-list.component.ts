@@ -58,7 +58,6 @@ export class UsersListComponent implements OnInit {
     this.router.navigateByUrl(`users/form/${userId}`).then();
   }
   getCountryName(countryKey: string) {
-    console.log("hallo" ,this.usersService.getCountry(countryKey))
     if (countryKey) return this.usersService.getCountry(countryKey);
   }
 

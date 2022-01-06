@@ -2,14 +2,8 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Order, OrdersService} from "@lav/orders";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Router} from "@angular/router";
+import {ORDER_STATUS} from "../order.constants";
 
-const ORDER_STATUS = {
-  0: {label: 'Pending', color: 'primary'},
-  1: {label: 'Processed', color: 'warning'},
-  2: {label: 'Shipped', color: 'warning'},
-  3: {label: 'Delivered', color: 'success'},
-  4: {label: 'Failed', color: 'danger'}
-}
 
 @Component({
   selector: 'admin-orders-list',
@@ -33,7 +27,6 @@ export class OrdersListComponent implements OnInit {
   }
 
   deleteOrder(orderId: string) {
-
     this.confirmationService.confirm({
       message: 'Do you want to delete this Order?',
       header: 'Delete Order',
@@ -46,7 +39,7 @@ export class OrdersListComponent implements OnInit {
               {
                 severity: 'success',
                 summary: 'Success',
-                detail: 'Oder successful deleted'
+                detail: 'Order successful deleted'
               });
           },
           (() => {
@@ -62,8 +55,8 @@ export class OrdersListComponent implements OnInit {
     });
   }
 
-  updateOrder(orderId: string) {
-    this.router.navigateByUrl(`orders/form/${orderId}`).then();
+  showOrder(orderId: string) {
+    this.router.navigateByUrl(`orders/${orderId}`).then();
   }
 
   private getOrders() {

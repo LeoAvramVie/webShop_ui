@@ -144,7 +144,6 @@ export class ProductFormComponent implements OnInit {
 
   private getProducts(){
      this.categoriesService.getCategories().subscribe((categories) => {
-       console.log(categories)
        this.categories = categories;
      });
   }

@@ -36,6 +36,7 @@ import {InputMaskModule} from "primeng/inputmask";
 import {OrdersListComponent} from "./pages/orders/orders-list/orders-list.component";
 import {OrdersDetailComponent} from "./pages/orders/orders-detail/orders-detail.component";
 import {OrdersService} from "../../../../libs/orders/src/lib/services/orders.service";
+import {FieldsetModule} from "primeng/fieldset";
 
 const routes: Routes = [
   {
@@ -132,7 +133,8 @@ const routes: Routes = [
     InputTextareaModule,
     EditorModule,
     TagModule,
-    InputMaskModule
+    InputMaskModule,
+    FieldsetModule
   ],
   providers: [CategoriesService, MessageService, ConfirmationService, UsersService, OrdersService],
   bootstrap: [AppComponent],
