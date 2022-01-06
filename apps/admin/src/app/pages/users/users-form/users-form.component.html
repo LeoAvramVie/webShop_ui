@@ -1,0 +1,109 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card [header]="editMode ? 'Edit User' : 'Add User'" subheader="You can add or edit a user">
+    <!--    categoriesTableToolBar-->
+    <div class="grid mb-5">
+      <div class="col-12">
+        <p-toolbar>
+          <div class="toolbar-group-left"></div>
+          <div class="toolbar-group-right">
+            <p-button
+              styleClass="button-primary mr-4"
+              [label]="editMode ? 'Update': 'Create'"
+              icon="pi pi-plus"
+              (click)="onSubmit()"
+            ></p-button>
+            <p-button
+              label="Cancel"
+              icon="pi pi-arrow-circle-left"
+              styleClass="button-secondary"
+              (click)="onCancel()"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <!--    categoriesTable-->
+    <br>
+    <div class="grid">
+      <div class="col-12">
+        <form [formGroup]="form">
+          <div class="p-fluid p-formgrid grid">
+            <div class="field col">
+              <label for="name">Name</label>
+              <input id="name" type="text" pInputText formControlName="name">
+              <small *ngIf="userForm.name.invalid && isSubmitted" class="p-error">Name is required</small>
+            </div>
+            <div class="field col">
+              <label for="email">Email</label>
+              <input id="email" type="email" pInputText formControlName="email">
+              <small *ngIf="userForm.email.invalid && isSubmitted" class="p-error">
+                <span *ngIf="userForm.email.errors.required">Email is required</span>
+                <span *ngIf="userForm.email.errors.email">Email format is wrong</span>
+              </small>
+
+            </div>
+            <div class="field col">
+              <label for="password">Password</label>
+              <input id="password" type="password" pInputText formControlName="password">
+              <small *ngIf="userForm.password.invalid && isSubmitted" class="p-error">Password is required</small>
+            </div>
+          </div>
+          <div class="p-fluid p-formgrid grid">
+            <div class="field col-4">
+              <label>Phone</label>
+              <p-inputMask
+                mask="(99) 999-9999999"
+                placeholder="(+43) 664-1234567"
+                formControlName="phone"
+              ></p-inputMask>
+              <small *ngIf="userForm.phone.invalid && isSubmitted" class="p-error">Phone is required</small>
+            </div>
+            <div class="field col">
+              <label>isAdmin</label><br>
+              <p-inputSwitch formControlName="isAdmin"></p-inputSwitch>
+            </div>
+          </div>
+          <div class="p-fluid p-formgrid grid">
+            <div class="field col">
+              <label for="street">Street</label>
+              <input id="street" type="text" pInputText formControlName="street">
+              <small *ngIf="userForm.street.invalid && isSubmitted" class="p-error">Street is required</small>
+            </div>
+            <div class="field col">
+              <label for="apartment">Apartment</label>
+              <input id="apartment" type="text" pInputText formControlName="apartment">
+              <small *ngIf="userForm.apartment.invalid && isSubmitted" class="p-error">Apartment is required</small>
+            </div>
+            <div class="field col">
+              <label for="zip">Zip Code</label>
+              <input id="zip" type="text" pInputText formControlName="zip">
+              <small *ngIf="userForm.zip.invalid && isSubmitted" class="p-error">Zip is required</small>
+            </div>
+          </div>
+          <div class="p-fluid p-formgrid grid">
+            <div class="field col-4">
+              <label for="city">City</label>
+              <input id="city" type="text" pInputText formControlName="city">
+              <small *ngIf="userForm.city.invalid && isSubmitted" class="p-error">City is required</small>
+            </div>
+            <div class="field col-4">
+              <label>Country</label>
+              <p-dropdown
+                [options]="countries"
+                optionLabel="name"
+                optionValue="id"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                formControlName="country"
+                placeholder="Select a country">
+              </p-dropdown>
+              <small *ngIf="userForm.country.invalid && isSubmitted" class="p-error">Country is required</small>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>
