@@ -39,7 +39,7 @@ export class OrdersDetailComponent implements OnInit {
             summary: 'Success',
             detail: `Order Staus is updated`
           });
-        timer(2000).toPromise().then(() => {
+        timer(1000).toPromise().then(() => {
           this.locationService.back();
         })
       },
