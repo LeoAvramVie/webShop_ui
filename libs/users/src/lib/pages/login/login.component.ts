@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../service/auth.service";
+import {AuthService} from "@lav/users";
 import {HttpErrorResponse} from "@angular/common/http";
 import {LocalStorageService} from "../../service/localStorage.service";
 import {Router} from "@angular/router";
@@ -40,13 +40,11 @@ export class LoginComponent implements OnInit {
       (user) => {
         this.authError = false;
         this.checkIfAdmin();
-        console.log('success', this.isAdmin)
         this.localStorageService.setToken(user.token)
         this.route.navigateByUrl('/')
     },
       (error: HttpErrorResponse) => {
         this.authError = true;
-        console.log('error', this.isAdmin)
         this.checkIfAdmin();
         if (error.status !== 400){
           this.authMessage = "Error in the Server, please try again later"

@@ -34,7 +34,7 @@
             <tr>
 
               <td>{{order.user?.name}}</td>
-              <td>{{order?.totalPrice}}</td>
+              <td>{{order?.totalPrice | currency}}</td>
               <td>{{order?.dateOrdered | date }}</td>
               <td>
                 <p-tag
