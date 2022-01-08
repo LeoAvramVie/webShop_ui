@@ -19,12 +19,9 @@ export class AuthGuard implements CanActivate {
       const tokenDecode = JSON.parse(atob(token.split(('.'))[1]));
       const isAdmin = tokenDecode.isAdmin;
       const expirationsDateofToken = tokenDecode.exp
-      console.log(this.tokenExpired(expirationsDateofToken))
       if (isAdmin === true || isAdmin === 'true' && !this.tokenExpired(expirationsDateofToken)){
-        console.log("return true")
         return true;
       } else {
-        console.log("return false")
         return false
       }
 

@@ -4,3 +4,4 @@ export * from './lib/service/users.service';
 export * from './lib/service/auth-guard.service';
 export * from './lib/service/jwt.interceptor';
 export * from './lib/service/auth.service';
+export * from './lib/service/dashboard.service';

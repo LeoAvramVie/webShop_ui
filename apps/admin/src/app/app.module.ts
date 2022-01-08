@@ -30,7 +30,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {EditorModule} from "primeng/editor";
 import {UsersFormComponent} from './pages/users/users-form/users-form.component';
 import {UsersListComponent} from './pages/users/users-list/users-list.component';
-import {AuthGuard, JwtInterceptor, UsersModule, UsersService} from "@lav/users";
+import {AuthGuard, DashboardService, JwtInterceptor, UsersModule, UsersService} from "@lav/users";
 import {TagModule} from "primeng/tag";
 import {InputMaskModule} from "primeng/inputmask";
 import {OrdersListComponent} from "./pages/orders/orders-list/orders-list.component";
@@ -144,6 +144,7 @@ const routes: Routes = [
     MessageService,
     ConfirmationService,
     UsersService,
+    DashboardService,
     OrdersService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],

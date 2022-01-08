@@ -30,6 +30,9 @@
             <div class="col-12" *ngIf="isSubmitted && authError">
               <small  class="p-error">{{authMessage}}</small>
             </div>
+            <div class="col-12" *ngIf="isAdmin === 2">
+              <small  class="p-error">Fuck of you are not an Admin</small>
+            </div>
           </div>
         </form>
       </div>
