@@ -11,7 +11,7 @@ import {CardModule} from "primeng/card";
 import {ToolbarModule} from "primeng/toolbar";
 import {ButtonModule} from "primeng/button";
 import {TableModule} from "primeng/table";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {CategoriesService} from "@lav/products";
 import {CategoriesFormComponent} from './pages/categories/categories-form/categories-form.component';
 import {InputTextModule} from "primeng/inputtext";
@@ -30,17 +30,19 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {EditorModule} from "primeng/editor";
 import {UsersFormComponent} from './pages/users/users-form/users-form.component';
 import {UsersListComponent} from './pages/users/users-list/users-list.component';
-import {UsersService} from "../../../../libs/users/src/lib/service/users.service";
+import {AuthGuard, DashboardService, JwtInterceptor, UsersModule, UsersService} from "@lav/users";
 import {TagModule} from "primeng/tag";
 import {InputMaskModule} from "primeng/inputmask";
 import {OrdersListComponent} from "./pages/orders/orders-list/orders-list.component";
 import {OrdersDetailComponent} from "./pages/orders/orders-detail/orders-detail.component";
-import {OrdersService} from "../../../../libs/orders/src/lib/services/orders.service";
+import {OrdersService} from "@lav/orders";
 import {FieldsetModule} from "primeng/fieldset";
+
 
 const routes: Routes = [
   {
     path: '', component: ShellComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -134,9 +136,18 @@ const routes: Routes = [
     EditorModule,
     TagModule,
     InputMaskModule,
-    FieldsetModule
+    FieldsetModule,
+    UsersModule
   ],
-  providers: [CategoriesService, MessageService, ConfirmationService, UsersService, OrdersService],
+  providers: [
+    CategoriesService,
+    MessageService,
+    ConfirmationService,
+    UsersService,
+    DashboardService,
+    OrdersService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

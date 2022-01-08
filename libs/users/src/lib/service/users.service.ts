@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {environment} from "@env/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Category} from "@lav/products";
 import {User} from "../models/user";
 import * as countriesLib from 'i18n-iso-countries';
 
@@ -21,7 +20,7 @@ export class UsersService {
   }
 
   getUser(): Observable<User[]> {
-    return this.httpClient.get<Category[]>(this.apiUrlUsers)
+    return this.httpClient.get<User[]>(this.apiUrlUsers)
   }
 
   createUser(user: User): Observable<User> {
@@ -29,7 +28,7 @@ export class UsersService {
   }
 
   updateUser(user: User): Observable<User> {
-    return this.httpClient.put<Category>(`${this.apiUrlUsers}/${user.id}`, user)
+    return this.httpClient.put<User>(`${this.apiUrlUsers}/${user.id}`, user)
   }
 
   deleteUser(userID: string): Observable<User> {

@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <div class="admin-page">
-  <p-card [header]="editMode ? 'Edit Product' : 'Add Product'" subheader="You can add or edit a Product">
+  <p-card [header]="editMode ? 'Edit Product' : 'Add Product'" [subheader]="editMode ? 'You can edit a product' : 'You can add a product'">
     <!--    productTableToolBar-->
     <div class="grid mb-5">
       <div class="col-12">

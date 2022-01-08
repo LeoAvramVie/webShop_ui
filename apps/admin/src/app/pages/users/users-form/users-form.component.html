@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <div class="admin-page">
-  <p-card [header]="editMode ? 'Edit User' : 'Add User'" subheader="You can add or edit a user">
+  <p-card [header]="editMode ? 'Edit User' : 'Add User'" [subheader]="editMode ? 'You can edit a user' : 'You can add a user'">
     <!--    categoriesTableToolBar-->
     <div class="grid mb-5">
       <div class="col-12">
