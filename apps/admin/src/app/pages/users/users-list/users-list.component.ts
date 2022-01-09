@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {User, UsersService} from "@lav/users";
+import {Subject, takeUntil} from "rxjs";
 
 declare const require;
 
@@ -12,14 +13,20 @@ declare const require;
   ],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent implements OnInit, OnDestroy {
   users: User[] = [];
   countries = [];
+  endSubs$: Subject<any> = new Subject();
+
   constructor(private usersService: UsersService,
               private messageService: MessageService,
               private confirmationService: ConfirmationService,
               private router: Router) {
   }
+
+  ngOnDestroy(): void {
+    this.endSubs$.complete();
+    }
 
   ngOnInit(): void {
     this.getUsers();
@@ -31,7 +38,7 @@ export class UsersListComponent implements OnInit {
       header: 'Delete User',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.usersService.deleteUser(userId).subscribe(
+        this.usersService.deleteUser(userId).pipe(takeUntil(this.endSubs$)).subscribe(
           () => {
             this.getUsers();
             this.messageService.add(
@@ -62,7 +69,7 @@ export class UsersListComponent implements OnInit {
   }
 
   private getUsers() {
-    this.usersService.getUser().subscribe(users => {
+    this.usersService.getUser().pipe(takeUntil(this.endSubs$)).subscribe(users => {
       this.users = users
     });
   }

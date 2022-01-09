@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {OrdersService} from "@lav/orders";
 import {ActivatedRoute} from "@angular/router";
 import {ORDER_STATUS} from "../order.constants";
-import {timer} from "rxjs";
+import {Subject, takeUntil, timer} from "rxjs";
 import {MessageService} from "primeng/api";
 import {Location} from "@angular/common";
 
@@ -13,11 +13,13 @@ import {Location} from "@angular/common";
   styles: [],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class OrdersDetailComponent implements OnInit {
+export class OrdersDetailComponent implements OnInit, OnDestroy  {
 
   order;
   orderStatus = [];
   selectedStatus;
+
+  endSubs$: Subject<any> = new Subject();
 
   constructor(private orderService: OrdersService,
               private route: ActivatedRoute,
@@ -25,13 +27,18 @@ export class OrdersDetailComponent implements OnInit {
               private messageService: MessageService) {
   }
 
+  ngOnDestroy(): void {
+
+    this.endSubs$.complete();
+    }
+
   ngOnInit(): void {
     this.mapOrderStatus();
     this.getOrder();
   }
 
   onStatusChange(event){
-    this.orderService.updateOrder({status: event.value}, this.order.id).subscribe(
+    this.orderService.updateOrder({status: event.value}, this.order.id).pipe(takeUntil(this.endSubs$)).subscribe(
       () => {
         this.messageService.add(
           {
@@ -58,7 +65,7 @@ export class OrdersDetailComponent implements OnInit {
   private getOrder() {
     this.route.params.subscribe(params =>{
       if (params.id){
-        this.orderService.getOrderById(params.id).subscribe(order => {
+        this.orderService.getOrderById(params.id).pipe(takeUntil(this.endSubs$)).subscribe(order => {
           this.order = order;
           this.selectedStatus = order.status
         })

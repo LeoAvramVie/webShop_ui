@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from "@env/environment";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {User} from "@lav/users";
+import {User} from '../models/user';
 import {LocalStorageService} from "./localStorage.service";
 import {Router} from "@angular/router";
 
