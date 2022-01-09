@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {ProductsService} from "@lav/products";
 import {Router} from "@angular/router";
 import {ConfirmationService, MessageService} from "primeng/api";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'admin-product-list',
@@ -10,9 +11,11 @@ import {ConfirmationService, MessageService} from "primeng/api";
   ],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
 
   products = [];
+
+  endSubs$: Subject<any> = new Subject();
 
   constructor(private productService: ProductsService,
               private router: Router,
@@ -24,7 +27,7 @@ export class ProductListComponent implements OnInit {
   }
 
   private getProducts(){
-    this.productService.getProducts().subscribe(products=>{
+    this.productService.getProducts().pipe(takeUntil(this.endSubs$)).subscribe(products=>{
       this.products = products;
     })
   }
@@ -39,7 +42,7 @@ export class ProductListComponent implements OnInit {
         header: 'Delete Product',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          this.productService.deleteProducts(productId).subscribe(
+          this.productService.deleteProducts(productId).pipe(takeUntil(this.endSubs$)).subscribe(
             () => {
               this.getProducts();
               this.messageService.add(
@@ -61,6 +64,7 @@ export class ProductListComponent implements OnInit {
         }
       });
     }
-
-
+  ngOnDestroy(): void {
+    this.endSubs$.complete();
+  }
 }

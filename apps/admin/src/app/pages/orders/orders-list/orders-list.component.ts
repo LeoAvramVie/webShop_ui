@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {Order, OrdersService} from "@lav/orders";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {ORDER_STATUS} from "../order.constants";
+import {Subject, takeUntil} from "rxjs";
 
 
 @Component({
@@ -11,16 +12,22 @@ import {ORDER_STATUS} from "../order.constants";
   styles: [],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class OrdersListComponent implements OnInit {
+export class OrdersListComponent implements OnInit, OnDestroy {
 
   orders: Order[] = [];
   orderStatus = ORDER_STATUS;
+
+  endSubs$: Subject<any> = new Subject();
 
   constructor(private ordersService: OrdersService,
               private messageService: MessageService,
               private confirmationService: ConfirmationService,
               private router: Router) {
   }
+
+  ngOnDestroy(): void {
+    this.endSubs$.complete();
+    }
 
   ngOnInit(): void {
     this.getOrders();
@@ -32,7 +39,7 @@ export class OrdersListComponent implements OnInit {
       header: 'Delete Order',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.ordersService.deleteOrder(orderId).subscribe(
+        this.ordersService.deleteOrder(orderId).pipe(takeUntil(this.endSubs$)).subscribe(
           () => {
             this.getOrders();
             this.messageService.add(
@@ -60,7 +67,7 @@ export class OrdersListComponent implements OnInit {
   }
 
   private getOrders() {
-    this.ordersService.getOrders().subscribe(orders => {
+    this.ordersService.getOrders().pipe(takeUntil(this.endSubs$)).subscribe(orders => {
       this.orders = orders
     });
   }

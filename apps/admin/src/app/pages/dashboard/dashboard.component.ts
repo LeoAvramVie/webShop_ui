@@ -1,34 +1,39 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DashboardService} from "@lav/users";
-import {take} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'admin-dashboard',
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   orderCount;
   productsCount;
   userCount;
   totalSales;
 
+  endSubs$: Subject<any> = new Subject();
 
   constructor(private dashboardService: DashboardService) {
   }
 
   ngOnInit(): void {
 
-    this.orderCount = this.dashboardService.getOrdersCount().pipe(take(1)).subscribe(order => {
+    this.orderCount = this.dashboardService.getOrdersCount().pipe(takeUntil(this.endSubs$)).subscribe(order => {
       this.orderCount = order
     })
-    this.productsCount = this.dashboardService.getProductCount().pipe(take(1)).subscribe(product => {
+    this.productsCount = this.dashboardService.getProductCount().pipe(takeUntil(this.endSubs$)).subscribe(product => {
       this.productsCount = product
     })
-    this.userCount = this.dashboardService.getUserCount().pipe(take(1)).subscribe(user => {
+    this.userCount = this.dashboardService.getUserCount().pipe(takeUntil(this.endSubs$)).subscribe(user => {
       this.userCount = user
     })
-    this.totalSales = this.dashboardService.getTotalSales().pipe(take(1)).subscribe(totalSales => {
+    this.totalSales = this.dashboardService.getTotalSales().pipe(takeUntil(this.endSubs$)).subscribe(totalSales => {
       this.totalSales = totalSales
     })
+  }
+
+  ngOnDestroy(): void {
+    this.endSubs$.complete();
   }
 }

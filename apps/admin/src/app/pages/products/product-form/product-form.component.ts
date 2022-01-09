@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CategoriesService, Product, ProductsService} from "@lav/products";
-import {timer} from "rxjs";
+import {Subject, takeUntil, timer} from "rxjs";
 import {Location} from "@angular/common";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute} from "@angular/router";
@@ -13,7 +13,7 @@ import {ActivatedRoute} from "@angular/router";
   ],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   editMode = false;
@@ -21,6 +21,7 @@ export class ProductFormComponent implements OnInit {
   categories = [];
   imageDisplay: string | ArrayBuffer;
   currentProductId: string;
+  endSubs$: Subject<any> = new Subject();
 
   constructor(private formBuilder: FormBuilder,
               private categoriesService: CategoriesService,
@@ -28,6 +29,10 @@ export class ProductFormComponent implements OnInit {
               private productService: ProductsService,
               private messageService: MessageService,
               private route: ActivatedRoute) { }
+
+  ngOnDestroy(): void {
+    this.endSubs$.complete();
+    }
 
   ngOnInit(): void {
     this.getProducts();
@@ -71,7 +76,7 @@ export class ProductFormComponent implements OnInit {
 
   private updateProduct(productFormData: FormData){
 
-    this.productService.updateProducts(productFormData, this.currentProductId).subscribe(
+    this.productService.updateProducts(productFormData, this.currentProductId).pipe(takeUntil(this.endSubs$)).subscribe(
       () => {
         this.messageService.add(
           {
@@ -118,7 +123,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   private addProduct(productData: FormData){
-    this.productService.createProducts(productData).subscribe(
+    this.productService.createProducts(productData).pipe(takeUntil(this.endSubs$)).subscribe(
       (product: Product) => {
         this.messageService.add(
           {
@@ -143,7 +148,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   private getProducts(){
-     this.categoriesService.getCategories().subscribe((categories) => {
+     this.categoriesService.getCategories().pipe(takeUntil(this.endSubs$)).subscribe((categories) => {
        this.categories = categories;
      });
   }

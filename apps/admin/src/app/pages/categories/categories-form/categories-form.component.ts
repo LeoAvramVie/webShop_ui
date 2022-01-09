@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CategoriesService, Category} from "@lav/products";
 import {MessageService} from "primeng/api";
-import {timer} from "rxjs";
+import {Subject, takeUntil, timer} from "rxjs";
 import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
 
@@ -12,12 +12,14 @@ import {ActivatedRoute} from "@angular/router";
   styles: [],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class CategoriesFormComponent implements OnInit {
+export class CategoriesFormComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   isSubmitted = false;
   editMode = false;
   currentCategoryID: string = null;
+
+  endSubs$: Subject<any> = new Subject();
 
   constructor(private formBuilder: FormBuilder,
               private categoryService: CategoriesService,
@@ -25,6 +27,10 @@ export class CategoriesFormComponent implements OnInit {
               private locationService: Location,
               private activatedRoute: ActivatedRoute) {
   }
+
+  ngOnDestroy() {
+        this.endSubs$.complete();
+    }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -58,7 +64,7 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private addCategory(category: Category) {
-    this.categoryService.createCategory(category).subscribe(
+    this.categoryService.createCategory(category).pipe(takeUntil(this.endSubs$)).subscribe(
       () => {
         this.messageService.add(
           {
@@ -83,7 +89,7 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private updateCategory(category: Category) {
-    this.categoryService.updateCategory(category).subscribe(
+    this.categoryService.updateCategory(category).pipe(takeUntil(this.endSubs$)).subscribe(
       () => {
         this.messageService.add(
           {

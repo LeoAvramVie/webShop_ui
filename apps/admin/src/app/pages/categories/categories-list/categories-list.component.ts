@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {CategoriesService, Category} from "@lav/products";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Router} from "@angular/router";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'admin-categories-list',
@@ -9,15 +10,22 @@ import {Router} from "@angular/router";
   styles: [],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class CategoriesListComponent implements OnInit {
+export class CategoriesListComponent implements OnInit, OnDestroy {
 
   categories: Category[] = [];
+
+  endSubs$: Subject<any> = new Subject();
+
 
   constructor(private categoriesService: CategoriesService,
               private messageService: MessageService,
               private confirmationService: ConfirmationService,
               private router: Router) {
   }
+
+  ngOnDestroy(): void {
+    this.endSubs$.complete();
+    }
 
   ngOnInit(): void {
     this.getCategories();
@@ -30,7 +38,7 @@ export class CategoriesListComponent implements OnInit {
       header: 'Delete Category',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.categoriesService.deleteCategory(categoryId).subscribe(
+        this.categoriesService.deleteCategory(categoryId).pipe(takeUntil(this.endSubs$)).subscribe(
           () => {
             this.getCategories();
             this.messageService.add(
@@ -58,7 +66,7 @@ export class CategoriesListComponent implements OnInit {
   }
 
   private getCategories() {
-    this.categoriesService.getCategories().subscribe(cats => {
+    this.categoriesService.getCategories().pipe(takeUntil(this.endSubs$)).subscribe(cats => {
       this.categories = cats
     });
   }

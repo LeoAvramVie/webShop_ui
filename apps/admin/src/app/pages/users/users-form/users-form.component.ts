@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Category} from "@lav/products";
 import {MessageService} from "primeng/api";
 import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
-import {timer} from "rxjs";
+import {Subject, takeUntil, timer} from "rxjs";
 import {User, UsersService} from "@lav/users";
 
 
@@ -14,7 +14,7 @@ import {User, UsersService} from "@lav/users";
   styles: [],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class UsersFormComponent implements OnInit {
+export class UsersFormComponent implements OnInit, OnDestroy {
 
 
   form: FormGroup;
@@ -22,6 +22,7 @@ export class UsersFormComponent implements OnInit {
   editMode = false;
   currentUserID: string = null;
   countries = [];
+  endSubs$: Subject<any> = new Subject();
 
   constructor(private formBuilder: FormBuilder,
               private userService: UsersService,
@@ -29,6 +30,10 @@ export class UsersFormComponent implements OnInit {
               private locationService: Location,
               private activatedRoute: ActivatedRoute) {
   }
+
+  ngOnDestroy(): void {
+    this.endSubs$.complete();
+    }
 
   ngOnInit(): void {
     this.initUserForm();
@@ -85,7 +90,7 @@ export class UsersFormComponent implements OnInit {
   }
 
   private addUser(user: User) {
-    this.userService.createUser(user).subscribe(
+    this.userService.createUser(user).pipe(takeUntil(this.endSubs$)).subscribe(
       () => {
         this.messageService.add(
           {
@@ -93,7 +98,7 @@ export class UsersFormComponent implements OnInit {
             summary: 'Success',
             detail: `User ${user.name} is created`
           });
-        timer(1000).toPromise().then(() => {
+        timer(1000).pipe(takeUntil(this.endSubs$)).toPromise().then(() => {
           this.locationService.back();
         })
       },
@@ -110,7 +115,7 @@ export class UsersFormComponent implements OnInit {
   }
 
   private updateUser(user: Category) {
-    this.userService.updateUser(user).subscribe(
+    this.userService.updateUser(user).pipe(takeUntil(this.endSubs$)).subscribe(
       () => {
         this.messageService.add(
           {
@@ -118,7 +123,7 @@ export class UsersFormComponent implements OnInit {
             summary: 'Success',
             detail: `User ${user.name} is edit`
           });
-        timer(2000).toPromise().then(() => {
+        timer(2000).pipe(takeUntil(this.endSubs$)).toPromise().then(() => {
           this.locationService.back();
         })
       },
