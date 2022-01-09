@@ -11,11 +11,23 @@ import {HeaderComponent} from './shared/header/header.component';
 import {FooterComponent} from './shared/footer/footer.component';
 import {UiModule} from "@lav/ui";
 import {AccordionModule} from 'primeng/accordion';
+import {NavComponent} from './shared/nav/nav/nav.component';
 
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, ProductListComponent, HeaderComponent, FooterComponent,],
-  imports: [BrowserModule, AppRoutingModule, UiModule, AccordionModule, BrowserAnimationsModule],
+  declarations: [
+    AppComponent,
+    HomePageComponent,
+    ProductListComponent,
+    HeaderComponent,
+    FooterComponent,
+    NavComponent,],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    UiModule,
+    AccordionModule,
+    BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

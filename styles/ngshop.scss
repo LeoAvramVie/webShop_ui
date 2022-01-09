@@ -1,4 +1,5 @@
 //Base
+@import '~normalize.css/normalize.css';
 @import "./base/colors";
 @import "./base/fonts";
 @import "./base/mixins";
@@ -18,8 +19,14 @@
 //shared
 @import "./apps/shop/shared/header";
 @import "./apps/shop/shared/footer";
+@import "./apps/shop/shared/nav";
 
 //libs
 @import "libs/ui/ui";
 
-
+.container{
+  width: 1200px;
+  padding: 15px;
+  margin: 0 auto;
+  background-color: lightslategray;
+}
