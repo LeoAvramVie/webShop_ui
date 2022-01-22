@@ -22,7 +22,8 @@
 @import "./apps/shop/shared/nav";
 
 //libs
-@import "libs/ui/ui";
+@import "libs/products/products";
+@import "libs/users/users";
 
 .container{
   width: 1200px;

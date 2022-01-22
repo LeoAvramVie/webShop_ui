@@ -12,6 +12,7 @@ import {FooterComponent} from './shared/footer/footer.component';
 import {UiModule} from "@lav/ui";
 import {AccordionModule} from 'primeng/accordion';
 import {NavComponent} from './shared/nav/nav/nav.component';
+import {ProductsModule} from "@lav/products";
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import {NavComponent} from './shared/nav/nav/nav.component';
     BrowserModule,
     AppRoutingModule,
     UiModule,
+    ProductsModule,
     AccordionModule,
     BrowserAnimationsModule],
   providers: [],
