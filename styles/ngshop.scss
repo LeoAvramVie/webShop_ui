@@ -24,10 +24,11 @@
 //libs
 @import "libs/products/products";
 @import "libs/users/users";
+@import "libs/ui/ui";
 
 .container{
   width: 1200px;
   padding: 15px;
   margin: 0 auto;
-  background-color: lightslategray;
+  background-color: rgba(219, 219, 224, 0.3);
 }
