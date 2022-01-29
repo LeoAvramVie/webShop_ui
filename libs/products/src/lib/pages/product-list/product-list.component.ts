@@ -21,9 +21,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
         this.getCategories();
     }
 
-    private getProducts() {
+    categoryFilter() {
+        const selectedCategories = this.categories.filter((category) => category.checked).map((category) => category.id);
+
+        this.getProducts(selectedCategories);
+    }
+
+    private getProducts(categoriesFilter?: (string | undefined)[]) {
         this.productService
-            .getProducts()
+            .getProducts(categoriesFilter)
             .pipe(takeUntil(this.endSubs$))
             .subscribe((products) => {
                 this.products = products;
