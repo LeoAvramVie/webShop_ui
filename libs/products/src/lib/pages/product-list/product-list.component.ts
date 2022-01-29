@@ -38,6 +38,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
             .getProducts(categoriesFilter)
             .pipe(takeUntil(this.endSubs$))
             .subscribe((products) => {
+                console.log('products', this.products);
                 this.products = products;
             });
     }

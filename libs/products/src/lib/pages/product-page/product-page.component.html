@@ -1,0 +1,15 @@
+<div class="products-page">
+    <div class="grid">
+        <div class="col-6">
+            <img src="{{ product.image }}" alt="" />
+        </div>
+        <div class="col-6 product" *ngIf="product">
+            <h2>{{ product.name }}</h2>
+            <p class="product-desc">{{ product.description }}</p>
+
+            <p class="product-desc">{{ product.price }}</p>
+            <p class="product-desc">{{ product.brand }}</p>
+            <p class="product-desc">{{ product.countInStock }}</p>
+        </div>
+    </div>
+</div>
