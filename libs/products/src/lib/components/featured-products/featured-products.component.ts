@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { ProductsService } from '../../services/products.service';
-import { Subject, takeUntil } from 'rxjs';
-import { Product } from '@lav/products';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {ProductsService} from '../../services/products.service';
+import {Subject, takeUntil} from 'rxjs';
+import {Product} from '@lav/products';
 
 @Component({
     selector: 'products-featured-products',
@@ -24,7 +24,6 @@ export class FeaturedProductsComponent implements OnInit, OnDestroy {
             .getFeaturedProducts(4)
             .pipe(takeUntil(this.endSubs$))
             .subscribe((products) => {
-                console.log(products);
                 this.featureProducts = products;
             });
     }

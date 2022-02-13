@@ -4,8 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-
-import { ProductListComponent } from './pages/product-list/product-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -16,7 +14,7 @@ import { ProductsModule } from '@lav/products';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-    declarations: [AppComponent, HomePageComponent, ProductListComponent, HeaderComponent, FooterComponent, NavComponent],
+    declarations: [AppComponent, HomePageComponent, HeaderComponent, FooterComponent, NavComponent],
     imports: [BrowserModule, AppRoutingModule, HttpClientModule, UiModule, ProductsModule, AccordionModule, BrowserAnimationsModule],
     providers: [],
     bootstrap: [AppComponent]
