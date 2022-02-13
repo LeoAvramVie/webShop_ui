@@ -10,6 +10,8 @@ import { Subject, takeUntil } from 'rxjs';
     encapsulation: ViewEncapsulation.Emulated
 })
 export class ProductPageComponent implements OnInit, OnDestroy {
+    quantity: number | undefined;
+
     product: Product | undefined;
 
     endSubs$: Subject<any> = new Subject();
@@ -23,6 +25,8 @@ export class ProductPageComponent implements OnInit, OnDestroy {
             }
         });
     }
+
+    addProductToCart() {}
 
     private getProduct(id: string) {
         this.productService

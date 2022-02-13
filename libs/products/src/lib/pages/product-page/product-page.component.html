@@ -1,15 +1,34 @@
 <div class="products-page">
     <div class="grid">
-        <div class="col-6">
+        <div class="col-6" *ngIf="product">
             <img src="{{ product.image }}" alt="" />
         </div>
         <div class="col-6 product" *ngIf="product">
-            <h2>{{ product.name }}</h2>
+            <h2 class="product-name">{{ product.name }}</h2>
             <p class="product-desc">{{ product.description }}</p>
+            <div class="product-rating">
+                <p-rating [(ngModel)]="product.rating" [disabled]="true" [cancel]="false" stars="5"></p-rating>
+            </div>
+            <div class="product-price">
+                {{ +product.price | currency }}
+                <span class="price-before">{{ +product.price + 18 | currency }}</span>
+            </div>
+            <div class="product-quantity">
+                <div class="field col-12 md:col-3 p-0">
+                    <label>Quantity</label>
+                    <p-inputNumber [(ngModel)]="quantity" inputId="quantity" mode="decimal" [showButtons]="true" [min]="0" [max]="100"> </p-inputNumber>
+                </div>
+            </div>
+            <div class="product-action">
+                <button pButton pRipple type="button" label="Buy Now" class="p-button-rounded mr-2"></button>
+                <button pButton pRipple type="button" label="Add to Cart" class="p-button-rounded" (click)="addProductToCart()"></button>
+            </div>
+        </div>
+    </div>
 
-            <p class="product-desc">{{ product.price }}</p>
-            <p class="product-desc">{{ product.brand }}</p>
-            <p class="product-desc">{{ product.countInStock }}</p>
+    <div class="grid product-rich-desc">
+        <div class="col-12" *ngIf="product">
+            <div [innerHTML]="product.richDescription"></div>
         </div>
     </div>
 </div>
