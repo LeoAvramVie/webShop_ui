@@ -12,10 +12,11 @@ import { AccordionModule } from 'primeng/accordion';
 import { NavComponent } from './shared/nav/nav/nav.component';
 import { ProductsModule } from '@lav/products';
 import { HttpClientModule } from '@angular/common/http';
+import { OrdersModule } from '@lav/orders';
 
 @NgModule({
     declarations: [AppComponent, HomePageComponent, HeaderComponent, FooterComponent, NavComponent],
-    imports: [BrowserModule, AppRoutingModule, HttpClientModule, UiModule, ProductsModule, AccordionModule, BrowserAnimationsModule],
+    imports: [BrowserModule, AppRoutingModule, HttpClientModule, UiModule, ProductsModule, AccordionModule, OrdersModule, BrowserAnimationsModule],
     providers: [],
     bootstrap: [AppComponent]
 })
