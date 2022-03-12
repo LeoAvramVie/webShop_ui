@@ -3,7 +3,6 @@ import { Product, ProductsService } from '@lav/products';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { CartItem, CartService } from '@lav/orders';
-import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'products-product-page',
