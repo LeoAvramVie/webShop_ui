@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CategoriesService, Product, ProductsService} from "@lav/products";
+import {CategoriesService, OrdersService, Product} from "@lav/products";
 import {Subject, takeUntil, timer} from "rxjs";
 import {Location} from "@angular/common";
 import {MessageService} from "primeng/api";
@@ -26,7 +26,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
               private categoriesService: CategoriesService,
               private locationService: Location,
-              private productService: ProductsService,
+              private productService: OrdersService,
               private messageService: MessageService,
               private route: ActivatedRoute) { }
 

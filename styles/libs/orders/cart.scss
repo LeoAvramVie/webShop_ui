@@ -1,0 +1,43 @@
+.cart-page{
+  min-height: 500px;
+
+  .cart{
+    &-shipping{
+      color: green;
+    }
+    &-item{
+      background-color: rgba(86, 88, 103, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.11);
+      padding: 15px;
+      border-radius: 15px;
+      &-image{
+        img{
+          height: 120px;
+          max-width: 100%;
+        }
+      }
+      &-name{
+        font-weight: 600;
+        font-size: 1.2em;
+        margin-bottom: 15px;
+      }
+      &-price{
+        font-weight: 600;
+        font-size: 1.2em;
+        margin-bottom: 15px;
+        color: $primary-color;
+      }
+
+      &-quantity{
+        margin: 15px 0;
+      }
+
+      &-subtotal{
+        font-weight: 600;
+        &-value{
+          color: green;
+        }
+      }
+    }
+  }
+}

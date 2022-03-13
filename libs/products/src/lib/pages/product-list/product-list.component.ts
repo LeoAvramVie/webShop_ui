@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { CategoriesService, Category, Product, ProductsService } from '@lav/products';
-import { Subject, takeUntil } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {CategoriesService, Category, OrdersService, Product} from '@lav/products';
+import {Subject, takeUntil} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'products-list',
@@ -16,7 +16,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     endSubs$: Subject<any> = new Subject();
 
-    constructor(private productService: ProductsService, private categoryService: CategoriesService, private route: ActivatedRoute) {}
+    constructor(private productService: OrdersService, private categoryService: CategoriesService, private route: ActivatedRoute) {}
 
     ngOnInit(): void {
         this.route.params.subscribe((params) => {
