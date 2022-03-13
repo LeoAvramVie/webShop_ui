@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {Order, OrdersService} from "@lav/orders";
+import {Order, ORDER_STATUS, OrdersService} from "@lav/orders";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Router} from "@angular/router";
-import {ORDER_STATUS} from "../order.constants";
 import {Subject, takeUntil} from "rxjs";
 
 

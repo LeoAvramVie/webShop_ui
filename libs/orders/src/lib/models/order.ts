@@ -1,9 +1,8 @@
 import {OrderItem} from "./order-item";
-import {User} from "@lav/users";
 
 export interface Order {
   id?: string
-  orderItems?: OrderItem,
+  orderItems?: OrderItem[],
   shippingAddress1?: string,
   shippingAddress2?: string,
   city?: string,
@@ -12,7 +11,7 @@ export interface Order {
   phone?: string,
   status?: number,
   totalPrice?: string,
-  user?: User,
+  user?: any,
   dateOrdered?: string,
 
 }

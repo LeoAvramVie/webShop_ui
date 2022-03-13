@@ -11,7 +11,7 @@
       </div>
       <div>
         <h4>
-          My Cart: {{ 2 }} Item(s)
+          My Cart: {{ cartCount }} Item(s)
         </h4>
       </div>
       <div class="cart-shipping mb-5">
@@ -26,27 +26,33 @@
             <div class="cart-item-name">{{cartItem.product.name}}</div>
             <div class="cart-item-price">{{ +cartItem.product.price | currency }}</div>
             <div class="cart-item-remove">
-              <p-button icon="pi pi-trash" (onClick)="deleteCartItem()"></p-button>
+              <p-button icon="pi pi-trash" (onClick)="deleteCartItem(cartItem)"></p-button>
             </div>
           </div>
           <div class="col-3">
             <div class="p-field cart-item-quantity">
               <p-inputNumber
+                (onInput)="updateCartItemQuantity($event, cartItem)"
                 [inputId]="cartItem.product.id"
                 mode="decimal"
                 [showButtons]="true"
                 [min]="1"
-                [max]="100">
+                [max]="100"
+                [(ngModel)]="cartItem.quantity"
+              >
               </p-inputNumber>
             </div>
             <div class="cart-item-subtotal mt-2">
               Subtotal:
-              <span class="cart-item-subtotal-value">{{ cartItem.product.price + cartItem.quantity | currency}}</span>
+              <span class="cart-item-subtotal-value">{{ cartItem.product.price * cartItem.quantity | currency}}</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="col4">order summery</div>
+
     </div>
+    <div class="col-4">
+    <lav-orders-order-summary></lav-orders-order-summary>
+  </div>
   </div>
 </div>
