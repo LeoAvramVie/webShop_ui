@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Category } from '../models/category';
-import { Observable } from 'rxjs';
-import { environment } from '@env/environment';
-import { Product } from '../models/product';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Category} from '../models/category';
+import {Observable} from 'rxjs';
+import {environment} from '@env/environment';
+import {Product} from '../models/product';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ProductsService {
+export class OrdersService {
     apiUrlProducts = environment.apiUrl + 'products';
 
     constructor(private httpClient: HttpClient) {}

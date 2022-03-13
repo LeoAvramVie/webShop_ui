@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {ProductsService} from '../../services/products.service';
+import {OrdersService} from '../../services/products.service';
 import {Subject, takeUntil} from 'rxjs';
 import {Product} from '@lav/products';
 
@@ -13,7 +13,7 @@ export class FeaturedProductsComponent implements OnInit, OnDestroy {
     featureProducts: Product[] = [];
     endSubs$: Subject<any> = new Subject();
 
-    constructor(private prodService: ProductsService) {}
+    constructor(private prodService: OrdersService) {}
 
     ngOnInit(): void {
         this.getFeaturedProducts();

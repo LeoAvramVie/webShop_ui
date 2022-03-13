@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {ProductsService} from "@lav/products";
+import {OrdersService} from "@lav/products";
 import {Router} from "@angular/router";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Subject, takeUntil} from "rxjs";
@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   endSubs$: Subject<any> = new Subject();
 
-  constructor(private productService: ProductsService,
+  constructor(private productService: OrdersService,
               private router: Router,
               private messageService: MessageService,
               private confirmationService: ConfirmationService) { }

@@ -23,6 +23,7 @@
 
 //libs
 @import 'libs/products/products';
+@import 'libs/orders/orders';
 @import 'libs/users/users';
 @import 'libs/ui/ui';
 
@@ -31,4 +32,9 @@
     padding: 15px;
     margin: 0 auto;
     background-color: rgba(219, 219, 224, 0.3);
+  button{
+    background-color: $primary-color;
+    border: 0;
+  }
 }
+
