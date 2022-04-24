@@ -14,10 +14,11 @@ import {InputMaskModule} from "primeng/inputmask";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextModule} from "primeng/inputtext";
 import {ThankYouComponent} from './pages/thank-you/thank-you.component';
+import {AuthGuard} from "@lav/users";
 
 const routes: Routes = [
   {path: 'cart', component: CartPageComponent},
-  {path: 'checkout', component: CheckoutPageComponent},
+  {path: 'checkout',canActivate: [AuthGuard], component: CheckoutPageComponent},
   {path: 'success', component: ThankYouComponent}
 ];
 

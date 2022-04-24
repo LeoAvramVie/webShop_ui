@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../models/user";
 import * as countriesLib from 'i18n-iso-countries';
+import {UsersFacade} from "../state/users.facade";
 
 declare const require: (arg0: string) => countriesLib.LocaleData;
 
@@ -14,7 +15,8 @@ export class UsersService {
 
   apiUrlUsers = environment.apiUrl + 'users';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+              private usersFacade: UsersFacade) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     countriesLib.registerLocale(require("i18n-iso-countries/langs/en.json"));
   }
@@ -50,5 +52,17 @@ export class UsersService {
 
   getCountry(countryKey: string): string {
     return countriesLib.getName(countryKey, 'en');
+  }
+
+  initAppSession(){
+    this.usersFacade.buildUserSession();
+  }
+
+  observeCurrentUser(){
+    return this.usersFacade.currentUser$;
+  }
+
+  isCurrentUserAuth(){
+    return this.usersFacade.isAuth$;
   }
 }
