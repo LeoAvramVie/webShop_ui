@@ -37,6 +37,8 @@ import {OrdersDetailComponent} from "./pages/orders/orders-detail/orders-detail.
 import {OrdersService} from "@lav/orders";
 import {FieldsetModule} from "primeng/fieldset";
 import {AppRoutingModule} from "./app-routing.module";
+import {StoreModule} from "@ngrx/store";
+import {EffectsModule} from "@ngrx/effects";
 
 
 @NgModule({
@@ -59,6 +61,8 @@ import {AppRoutingModule} from "./app-routing.module";
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     CardModule,
     ToolbarModule,
     ButtonModule,

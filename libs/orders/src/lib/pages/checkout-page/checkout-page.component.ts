@@ -1,41 +1,48 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UsersService} from "@lav/users";
 import {CartService} from '../../services/cart.service';
 import {OrdersService} from '../../services/orders.service';
 import {Cart, Order, OrderItem} from "@lav/orders";
+import {Subject, takeUntil} from "rxjs";
 
 
 @Component({
   selector: 'lav-orders-checkout-page',
   templateUrl: './checkout-page.component.html',
-  styles: [
-  ],
+  styles: [],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class CheckoutPageComponent implements OnInit {
+export class CheckoutPageComponent implements OnInit, OnDestroy {
 
   checkoutFormGroup: FormGroup | undefined;
   isSubmitted = false;
   countries = [];
   orderItems: OrderItem[] = [];
-  userId = '61d594d2d742a1b5765ec11c';
+  userId: string | undefined ;
+  unsubscribe$:Subject<any> = new Subject()
 
   constructor(private router: Router,
               private usersService: UsersService,
               private formBuilder: FormBuilder,
               private cartService: CartService,
-              private ordersService: OrdersService) { }
+              private ordersService: OrdersService) {
+  }
+
+  ngOnDestroy(): void {
+       this.unsubscribe$.complete();
+    }
 
   ngOnInit(): void {
     this.initCheckoutForm();
+    this.authFillUserData();
     this.getCartItems();
     this.getCountries();
   }
 
-  backToCart(){
-      this.router.navigate(['/cart'])
+  backToCart() {
+    this.router.navigate(['/cart'])
   }
 
 
@@ -48,11 +55,10 @@ export class CheckoutPageComponent implements OnInit {
         quantity: item.quantity
       };
     }) as any;
-    console.log(this.orderItems)
   }
 
   private getCountries() {
-      this.countries = this.usersService.getCountries() as any;
+    this.countries = this.usersService.getCountries() as any;
   }
 
   private initCheckoutForm() {
@@ -70,6 +76,7 @@ export class CheckoutPageComponent implements OnInit {
 
 
   placeOrder() {
+    console.log("der Button")
     this.isSubmitted = true;
     if (this.checkoutFormGroup?.invalid) {
       return;
@@ -99,6 +106,23 @@ export class CheckoutPageComponent implements OnInit {
       }
     );
   }
+
+  authFillUserData() {
+    this.usersService.observeCurrentUser().pipe(takeUntil(this.unsubscribe$)).subscribe((userData) => {
+      if (userData) {
+        this.userId = userData?.id;
+        this.checkoutForm?.['name'].setValue(userData?.name);
+        this.checkoutForm?.['email'].setValue(userData?.email)
+        this.checkoutForm?.['phone'].setValue(userData?.phone)
+        this.checkoutForm?.['city'].setValue(userData?.city)
+        this.checkoutForm?.['country'].setValue(userData?.country)
+        this.checkoutForm?.['zip'].setValue(userData?.zip)
+        this.checkoutForm?.['apartment'].setValue(userData?.apartment)
+        this.checkoutForm?.['street'].setValue(userData?.street)
+      }
+    });
+  }
+
   get checkoutForm() {
     return this.checkoutFormGroup?.controls;
   }
