@@ -1,105 +1,39 @@
 
 
-# Lav
+# E-Commerce Application // Webshop
 
-This project was generated using [Nx](https://nx.dev).
+For Frontend :
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+- Angular 15, And Structuring your Project
 
-🔎 **Smart, Fast and Extensible Build System**
+- NX Monorepo
 
-## Quick Start & Documentation
+- PrimeNg Material Library
 
-[Nx Documentation](https://nx.dev/angular)
+- RXJS
 
-[10-minute video showing all Nx features](https://nx.dev/getting-started/intro)
+- NGRX For User Session
 
-[Interactive Tutorial](https://nx.dev/tutorial/01-create-application)
-
-## Adding capabilities to your workspace
-
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
-
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
-
-Below are our core plugins:
-
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
-
-There are also many [community plugins](https://nx.dev/community) you could add.
-
-## Generate an application
-
-Run `ng g @nrwl/angular:app my-app` to generate an application.
-
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same workspace.
-
-## Generate a library
-
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are shareable across libraries and applications. They can be imported from `@lav/mylib`.
-
-## Development server
-
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng g component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
+- SCSS
 
 
 
+For Backend ( WebAPI )
 
+- NodeJs
 
+- Express
 
-## ☁ Nx Cloud
+- MongoDB
 
-### Distributed Computation Caching & Distributed Task Execution
+- JWT (JSON Web Tokens)
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+My Personal Experience with the "Start Coding Like The Biggest Software Companies in The World!" Tutorial
 
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
+I recently completed this fantastic tutorial on building a full web application using the MEAN stack, which covers MongoDB, Express, Angular, and Node.js. I found the hands-on approach to learning incredibly engaging, as it allowed me to work on a real-world project while acquiring essential skills in various technologies.
 
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
+The frontend technologies I learned include Angular 15, NX Monorepo, PrimeNg Material Library, RXJS, NGRX for User Session, and SCSS. On the backend, I gained valuable knowledge about Node.js, Express, MongoDB, and JWT (JSON Web Tokens). The course also provided a solid introduction to server-side web development, teaching me the basics of building Angular apps, styling layouts, and calling an HTTP API from my app.
 
-Visit [Nx Cloud](https://nx.app/) to learn more.
+One of the highlights of this tutorial was the step-by-step guidance on building an e-shop app and admin panel from scratch. I learned about product and user management, handling carts, product filtering, login and authentication, and more. Moreover, I appreciated the insights on deploying my application to production servers and utilizing external libraries.
+
+By the end of the course, I had developed a fully functional e-commerce Angular app that I could use as a foundation for future projects or customize to fit my specific needs. This tutorial was an excellent learning experience for me as a web developer interested in the MEAN stack, and I highly recommend it to others seeking to expand their skills in full-stack, frontend, or backend web development.
