@@ -76,7 +76,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
 
 
   placeOrder() {
-    console.log("der Button")
+
     this.isSubmitted = true;
     if (this.checkoutFormGroup?.invalid) {
       return;

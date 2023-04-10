@@ -33,7 +33,8 @@ import {EffectsModule} from "@ngrx/effects";
     imports: [
       BrowserModule,
       AppRoutingModule,
-      HttpClientModule,StoreModule.forRoot({}),
+      HttpClientModule,
+      StoreModule.forRoot({}),
       EffectsModule.forRoot([]),
       UiModule, ProductsModule,
       AccordionModule, OrdersModule,
